@@ -7,23 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF54D8C529A78D15007C36E4 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF54D8C429A78D15007C36E4 /* Message.swift */; };
+		BF54D8C829A8BF97007C36E4 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF54D8C729A8BF97007C36E4 /* UserCell.swift */; };
+		BF54D8CA29AAF398007C36E4 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF54D8C929AAF398007C36E4 /* ChatMessageCell.swift */; };
 		BF89AAB4299F941B0090C612 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF89AAB3299F941B0090C612 /* AppDelegate.swift */; };
 		BF89AAB6299F941B0090C612 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF89AAB5299F941B0090C612 /* SceneDelegate.swift */; };
-		BF89AAB8299F941B0090C612 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF89AAB7299F941B0090C612 /* ViewController.swift */; };
-		BF89AABB299F941B0090C612 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF89AAB9299F941B0090C612 /* Main.storyboard */; };
+		BF89AAB8299F941B0090C612 /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF89AAB7299F941B0090C612 /* MessagesController.swift */; };
 		BF89AABD299F941C0090C612 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF89AABC299F941C0090C612 /* Assets.xcassets */; };
 		BF89AAC0299F941C0090C612 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF89AABE299F941C0090C612 /* LaunchScreen.storyboard */; };
+		BF89AAC9299F95E20090C612 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF89AAC8299F95E20090C612 /* LoginController.swift */; };
+		BF89AACB29A0768D0090C612 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BF89AACA29A0768D0090C612 /* GoogleService-Info.plist */; };
+		BF89AACD29A0D8C60090C612 /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF89AACC29A0D8C60090C612 /* NewMessageController.swift */; };
+		BF89AAD029A1CBEF0090C612 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF89AACF29A1CBEF0090C612 /* User.swift */; };
+		BF89AAD229A1E0E70090C612 /* LoginController+handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF89AAD129A1E0E70090C612 /* LoginController+handlers.swift */; };
+		BFC5B9D229A2FF5B00344AD5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC5B9D129A2FF5B00344AD5 /* Extensions.swift */; };
+		BFC5B9D429A4E07900344AD5 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC5B9D329A4E07900344AD5 /* ChatLogController.swift */; };
+		E19F1BF3742F035FD48F294A /* Pods_LBTAChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01010B98AF75A41290046024 /* Pods_LBTAChatApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01010B98AF75A41290046024 /* Pods_LBTAChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LBTAChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D8388CC32B13C4A1189004F /* Pods-LBTAChatApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LBTAChatApp.release.xcconfig"; path = "Target Support Files/Pods-LBTAChatApp/Pods-LBTAChatApp.release.xcconfig"; sourceTree = "<group>"; };
+		9A7D974C2FF1C3771440DB6F /* Pods-LBTAChatApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LBTAChatApp.debug.xcconfig"; path = "Target Support Files/Pods-LBTAChatApp/Pods-LBTAChatApp.debug.xcconfig"; sourceTree = "<group>"; };
+		BF54D8C429A78D15007C36E4 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		BF54D8C729A8BF97007C36E4 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		BF54D8C929AAF398007C36E4 /* ChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		BF89AAB0299F941B0090C612 /* LBTAChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LBTAChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF89AAB3299F941B0090C612 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF89AAB5299F941B0090C612 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BF89AAB7299F941B0090C612 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		BF89AABA299F941B0090C612 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BF89AAB7299F941B0090C612 /* MessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesController.swift; sourceTree = "<group>"; };
 		BF89AABC299F941C0090C612 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BF89AABF299F941C0090C612 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BF89AAC1299F941C0090C612 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF89AAC8299F95E20090C612 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		BF89AACA29A0768D0090C612 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BF89AACC29A0D8C60090C612 /* NewMessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
+		BF89AACF29A1CBEF0090C612 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		BF89AAD129A1E0E70090C612 /* LoginController+handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginController+handlers.swift"; sourceTree = "<group>"; };
+		BFC5B9D129A2FF5B00344AD5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		BFC5B9D329A4E07900344AD5 /* ChatLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +53,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E19F1BF3742F035FD48F294A /* Pods_LBTAChatApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF54D8C629A8BF83007C36E4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BF54D8C729A8BF97007C36E4 /* UserCell.swift */,
+				BF54D8C929AAF398007C36E4 /* ChatMessageCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		BF89AAA7299F941B0090C612 = {
 			isa = PBXGroup;
 			children = (
 				BF89AAB2299F941B0090C612 /* LBTAChatApp */,
 				BF89AAB1299F941B0090C612 /* Products */,
+				FA1C6756505B1E77C16D21FD /* Pods */,
+				FD15D61AA8A86364758DACA9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +90,64 @@
 		BF89AAB2299F941B0090C612 /* LBTAChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				BF54D8C629A8BF83007C36E4 /* View */,
+				BFC5B9D029A2FF4E00344AD5 /* Helpers */,
+				BF89AACE29A1CBDB0090C612 /* Model */,
+				BF89AAC7299F95B60090C612 /* Controller */,
 				BF89AAB3299F941B0090C612 /* AppDelegate.swift */,
 				BF89AAB5299F941B0090C612 /* SceneDelegate.swift */,
-				BF89AAB7299F941B0090C612 /* ViewController.swift */,
-				BF89AAB9299F941B0090C612 /* Main.storyboard */,
 				BF89AABC299F941C0090C612 /* Assets.xcassets */,
 				BF89AABE299F941C0090C612 /* LaunchScreen.storyboard */,
+				BF89AACA29A0768D0090C612 /* GoogleService-Info.plist */,
 				BF89AAC1299F941C0090C612 /* Info.plist */,
 			);
 			path = LBTAChatApp;
+			sourceTree = "<group>";
+		};
+		BF89AAC7299F95B60090C612 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				BF89AAC8299F95E20090C612 /* LoginController.swift */,
+				BFC5B9D329A4E07900344AD5 /* ChatLogController.swift */,
+				BF89AAD129A1E0E70090C612 /* LoginController+handlers.swift */,
+				BF89AACC29A0D8C60090C612 /* NewMessageController.swift */,
+				BF89AAB7299F941B0090C612 /* MessagesController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		BF89AACE29A1CBDB0090C612 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BF89AACF29A1CBEF0090C612 /* User.swift */,
+				BF54D8C429A78D15007C36E4 /* Message.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BFC5B9D029A2FF4E00344AD5 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BFC5B9D129A2FF5B00344AD5 /* Extensions.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		FA1C6756505B1E77C16D21FD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9A7D974C2FF1C3771440DB6F /* Pods-LBTAChatApp.debug.xcconfig */,
+				4D8388CC32B13C4A1189004F /* Pods-LBTAChatApp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		FD15D61AA8A86364758DACA9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				01010B98AF75A41290046024 /* Pods_LBTAChatApp.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +157,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BF89AAC4299F941C0090C612 /* Build configuration list for PBXNativeTarget "LBTAChatApp" */;
 			buildPhases = (
+				4F76B46B6AF1AAFB1C4B3374 /* [CP] Check Pods Manifest.lock */,
 				BF89AAAC299F941B0090C612 /* Sources */,
 				BF89AAAD299F941B0090C612 /* Frameworks */,
 				BF89AAAE299F941B0090C612 /* Resources */,
+				1E554242FB73A127AE569F2C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -127,19 +212,70 @@
 			files = (
 				BF89AAC0299F941C0090C612 /* LaunchScreen.storyboard in Resources */,
 				BF89AABD299F941C0090C612 /* Assets.xcassets in Resources */,
-				BF89AABB299F941B0090C612 /* Main.storyboard in Resources */,
+				BF89AACB29A0768D0090C612 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1E554242FB73A127AE569F2C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LBTAChatApp/Pods-LBTAChatApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LBTAChatApp/Pods-LBTAChatApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LBTAChatApp/Pods-LBTAChatApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4F76B46B6AF1AAFB1C4B3374 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LBTAChatApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BF89AAAC299F941B0090C612 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF89AAB8299F941B0090C612 /* ViewController.swift in Sources */,
+				BFC5B9D429A4E07900344AD5 /* ChatLogController.swift in Sources */,
+				BF89AAB8299F941B0090C612 /* MessagesController.swift in Sources */,
+				BF89AACD29A0D8C60090C612 /* NewMessageController.swift in Sources */,
+				BF89AAD029A1CBEF0090C612 /* User.swift in Sources */,
+				BFC5B9D229A2FF5B00344AD5 /* Extensions.swift in Sources */,
+				BF89AAC9299F95E20090C612 /* LoginController.swift in Sources */,
+				BF89AAD229A1E0E70090C612 /* LoginController+handlers.swift in Sources */,
+				BF54D8C529A78D15007C36E4 /* Message.swift in Sources */,
 				BF89AAB4299F941B0090C612 /* AppDelegate.swift in Sources */,
+				BF54D8CA29AAF398007C36E4 /* ChatMessageCell.swift in Sources */,
+				BF54D8C829A8BF97007C36E4 /* UserCell.swift in Sources */,
 				BF89AAB6299F941B0090C612 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,14 +283,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		BF89AAB9299F941B0090C612 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BF89AABA299F941B0090C612 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		BF89AABE299F941C0090C612 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -282,6 +410,7 @@
 		};
 		BF89AAC5299F941C0090C612 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A7D974C2FF1C3771440DB6F /* Pods-LBTAChatApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -292,9 +421,9 @@
 				INFOPLIST_FILE = LBTAChatApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,6 +439,7 @@
 		};
 		BF89AAC6299F941C0090C612 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4D8388CC32B13C4A1189004F /* Pods-LBTAChatApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -320,9 +450,9 @@
 				INFOPLIST_FILE = LBTAChatApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
