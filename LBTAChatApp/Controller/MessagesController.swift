@@ -13,14 +13,14 @@ class MessagesController: UITableViewController {
     let cellId = "cellId"
     var messages  = [Message]()
     var messagesDictionary = [String : Message]()
-
-//    let sfSymbol_paperplan = UIImage(systemName: "paperplan")
+    
+    //    let sfSymbol_paperplan = UIImage(systemName: "paperplan")
     let sfSymbol_paperplane = UIImage(systemName: "paperplane")
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         checkIfUserIsLoggedIn()
-
+        
         // Do any additional setup after loading the view.
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: sfSymbol_paperplane, style: .plain, target: self, action: #selector(handleNewMessage))
@@ -47,26 +47,30 @@ class MessagesController: UITableViewController {
                     message.fromID = dictionary["fromID"] as? String
                     
                     
-                    if let toId = message.toId {
-                        self.messagesDictionary[toId] = message
+                    if let chatPartnerId = message.chatPartnerId() {
+                        self.messagesDictionary[chatPartnerId] = message
                         self.messages = Array(self.messagesDictionary.values)
                         self.messages.sort { (message1, message2) -> Bool in
                             return message1.timestamp!.intValue > message2.timestamp!.intValue
                         }
                     }
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
+                    // 이렇게 하면 이미지가 순간적으로 바뀌어 나오는 것이 사라짐.
+                    self.timer?.invalidate()
+                    print("We just cancled our timer!")
+                    self.timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
+                    print("schdule a table reload in 0.2 sec!")
+
+                }
             }
         }
+        
     }
-
     
-    func observeMessages() {
-        let ref = Database.database().reference().child("messages")
-        ref.observe(.childAdded) { (snapshot, args) in // 속성감시자 같은 느낌이넵~
-
-            }
+    var timer: Timer?
+    
+    @objc func handleReloadTable() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
     
@@ -96,10 +100,10 @@ class MessagesController: UITableViewController {
     }
     
     
-//    @objc func handleNewMessage() {
-//        let newMessageController = NewMessageController()
-//        navigationController?.pushViewController(newMessageController, animated: true)
-//    }
+    //    @objc func handleNewMessage() {
+    //        let newMessageController = NewMessageController()
+    //        navigationController?.pushViewController(newMessageController, animated: true)
+    //    }
     
     func checkIfUserIsLoggedIn() {
         if Auth.auth().currentUser?.uid == nil {
@@ -134,11 +138,11 @@ class MessagesController: UITableViewController {
         messages.removeAll()
         messagesDictionary.removeAll()
         DispatchQueue.main.async(execute: {
-                    self.tableView.reloadData()
-                })
+            self.tableView.reloadData()
+        })
         
         observerUserMessage()
-
+        
         self.navigationItem.title = user.name
         let titleView = UIView()
         titleView.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
@@ -163,12 +167,12 @@ class MessagesController: UITableViewController {
         namelabel.text = user.name
         namelabel.translatesAutoresizingMaskIntoConstraints = false
         // need x,y,width,hieght
-
+        
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
         titleView.addSubview(containerView)
-
+        
         containerView.addSubview(profileImageView)
         containerView.addSubview(namelabel)
         
@@ -183,14 +187,14 @@ class MessagesController: UITableViewController {
             namelabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
             namelabel.rightAnchor.constraint(equalTo: containerView.rightAnchor),
             namelabel.heightAnchor.constraint(equalTo: profileImageView.heightAnchor),
-//
+            //
             containerView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor),
             containerView.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
-//
+            //
         ])
         self.navigationItem.titleView = titleView
-//        titleView.isUserInteractionEnabled = true
-//        titleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showChatController)))
+        //        titleView.isUserInteractionEnabled = true
+        //        titleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showChatController)))
         
     }
     
@@ -241,9 +245,9 @@ class MessagesController: UITableViewController {
 
 
 extension MessagesController {
-  func presentInFullScreen(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
-    viewController.modalPresentationStyle = .fullScreen
-
-    present(viewController, animated: animated, completion: completion)
-  }
+    func presentInFullScreen(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
+        viewController.modalPresentationStyle = .fullScreen
+        
+        present(viewController, animated: animated, completion: completion)
+    }
 }

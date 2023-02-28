@@ -12,7 +12,7 @@ import Firebase
 class ChatLogController : UICollectionViewController, UITextFieldDelegate ,UICollectionViewDelegateFlowLayout{
     
     var messages = [Message()]
-    
+    var containerViewBottomAnchor : NSLayoutConstraint?
     
     var user : User? {
         didSet {
@@ -74,12 +74,37 @@ class ChatLogController : UICollectionViewController, UITextFieldDelegate ,UICol
         let message = messages[indexPath.row]
         cell.textView.text = message.text
         
+        setupCell(cell: cell, message: message)
+        
+        
+        
         cell.bubbleWidthAnchor?.constant = estimateFrameForText(text: message.text ?? "I'm nil hehe").width + 20 // for now
-        
-        
-        
-        
         return cell
+    }
+    
+    private func setupCell(cell : ChatMessageCell, message: Message) {
+        if let profileImageUrl = self.user?.profileImageUrl   {
+            cell.profileImageView.loadImageUsingCacheWithUrlString(urlString: profileImageUrl)
+        }
+        
+        
+        
+        if message.fromID == Auth.auth().currentUser?.uid {
+            
+            cell.bubbleView.backgroundColor = ChatMessageCell.blueColor
+            cell.profileImageView.isHidden = true
+            cell.bubbleViewRightAnchor?.isActive = true
+            cell.bubbleViewLeftAnchor?.isActive = false
+            
+            
+        } else {
+            cell.bubbleView.backgroundColor = UIColor(r: 240, g: 240, b: 240)
+            cell.textView.textColor = UIColor.black
+            cell.profileImageView.isHidden = false
+            
+            cell.bubbleViewRightAnchor?.isActive = false
+            cell.bubbleViewLeftAnchor?.isActive = true
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -119,11 +144,78 @@ class ChatLogController : UICollectionViewController, UITextFieldDelegate ,UICol
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // It just gives additional margin to the collection view cell...
+        collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 58, right: 0)
+        collectionView?.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 50, right: 0)
         collectionView.alwaysBounceVertical = true // dragable!
         
         collectionView.register(ChatMessageCell.self, forCellWithReuseIdentifier: cellId)
         //        collectionView.backgroundColor = UIColor.red
-        setupInputComponenets()
+        
+        collectionView.keyboardDismissMode = .interactive
+        
+        //setupInputComponenets()
+        //setupKeyboardObservers()
+    
+    }
+    
+    override var inputAccessoryView: UIView? {
+        get {
+            let containerView = UIView()
+            containerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
+            containerView.backgroundColor = UIColor.lightGray
+            
+            let textFied = UITextField()
+            textFied.placeholder = "Enter Some Text "
+            containerView.addSubview(textFied)
+            textFied.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
+            
+            return containerView
+        }
+        
+    }
+    
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
+    
+    
+    func setupKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    // Potential memory leak if we don't remove observer
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    
+    
+    @objc func handleKeyboardWillHide(notification : Notification) {
+        guard let durationValue = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else { return }
+        
+        containerViewBottomAnchor?.constant = 0
+        UIView.animate(withDuration: durationValue) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc func handleKeyboardWillShow(notification : Notification) {
+        //let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey]
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRect = keyboardFrame.cgRectValue
+            // use keyboardRect here
+            guard let durationValue = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else { return }
+            
+            containerViewBottomAnchor?.constant = -keyboardRect.height + 35
+            UIView.animate(withDuration: durationValue) {
+                self.view.layoutIfNeeded()
+            }
+        }
     }
     
     
@@ -135,11 +227,14 @@ class ChatLogController : UICollectionViewController, UITextFieldDelegate ,UICol
         
         view.addSubview(containerView)
         // constraints
+        
+        containerViewBottomAnchor = containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        containerViewBottomAnchor?.isActive = true
+
         NSLayoutConstraint.activate([
             containerView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             containerView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            containerView.heightAnchor.constraint(equalToConstant: 50)
+            containerView.heightAnchor.constraint(equalToConstant: 50),
         ])
         
         let sendButton = UIButton(type: .system)
@@ -186,34 +281,6 @@ class ChatLogController : UICollectionViewController, UITextFieldDelegate ,UICol
     
     @objc func handleSend() {
         
-        
-        //        let ref = Database.database().reference().child("messages")
-        //        let childRef = ref.childByAutoId()
-        //
-        //
-        //        // How can we allocate it automatically? like magically?
-        //        let toId = user?.id
-        //        let fromId = Auth.auth().currentUser!.uid
-        //        let tmp = NSDate()
-        //        let timestamp : NSNumber = Int(tmp.timeIntervalSince1970) as NSNumber
-        //
-        //
-        //        let values = ["text" : inputTextField.text!, "toId" : String(toId!), "fromId" : String(fromId), "timestamp" : timestamp] as [String : AnyObject]
-        //
-        //
-        //        childRef.updateChildValues(values) { (error, ref) in
-        //            if error != nil {
-        //                print(error)
-        //                return
-        //            }
-        //            let messageId = childRef.key
-        //
-        //            let userMessageRef = Database.database().reference().child("user-messages").child(fromId)
-        //            userMessageRef.updateChildValues([messageId : 1])
-        //
-        //            let recipientUserMessageRef = Database.database().reference().child("user-messages").child(toId!)
-        //            recipientUserMessageRef.updateChildValues([messageId : 1])
-        //        }
         if inputTextField.text != nil && !(inputTextField.text?.trimmingCharacters(in: .whitespaces).isEmpty)!{
             let text = inputTextField.text
             let ref = Database.database().reference().child("messages")
@@ -251,6 +318,8 @@ class ChatLogController : UICollectionViewController, UITextFieldDelegate ,UICol
         return true
     }
     
-    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
     
 }

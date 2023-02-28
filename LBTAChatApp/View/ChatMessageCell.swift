@@ -11,7 +11,11 @@ import UIKit
 
 class ChatMessageCell: UICollectionViewCell {
     
+    static let blueColor = UIColor(r: 0, g: 137, b: 249)
+    
     var bubbleWidthAnchor : NSLayoutConstraint?
+    var bubbleViewRightAnchor : NSLayoutConstraint?
+    var bubbleViewLeftAnchor: NSLayoutConstraint?
     
     
     let textView : UITextView = {
@@ -26,7 +30,7 @@ class ChatMessageCell: UICollectionViewCell {
     
     let bubbleView: UIView = {
        let view = UIView()
-        view.backgroundColor = UIColor(r: 0, g: 137, b: 249)
+        view.backgroundColor = blueColor
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 15
         //view.clipsToBounds = true
@@ -34,11 +38,21 @@ class ChatMessageCell: UICollectionViewCell {
         return view
     }()
     
+    let profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = 25
+        imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "spiderman")
+        return imageView
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(bubbleView) // ADD IT FIRST!!!!!!!!!!!!!!!!!!!!
         addSubview(textView)   //  We need to put it to the VIEW!
+        addSubview(profileImageView)
         
         // and then we need constraints // x,y, width, height
         NSLayoutConstraint.activate([
@@ -51,13 +65,23 @@ class ChatMessageCell: UICollectionViewCell {
             //textView.widthAnchor.constraint(equalToConstant: 200),
             textView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 3),
             
-            bubbleView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8),
             bubbleView.topAnchor.constraint(equalTo: self.topAnchor),
             bubbleView.heightAnchor.constraint(equalTo: self.heightAnchor),
         ])
+        
+        bubbleViewRightAnchor = bubbleView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8)
+        bubbleViewRightAnchor?.isActive = true
         bubbleWidthAnchor = bubbleView.widthAnchor.constraint(equalToConstant: 200)
         bubbleWidthAnchor?.isActive = true
+        bubbleViewLeftAnchor = bubbleView.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 8)
+        //bubbleViewLeftAnchor?.isActive = true
         
+        NSLayoutConstraint.activate([
+            profileImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8),
+            profileImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
+            profileImageView.widthAnchor.constraint(equalToConstant: 50), // let's configure it later
+            profileImageView.heightAnchor.constraint(equalToConstant: 50)
+        ])
         
     }
     
