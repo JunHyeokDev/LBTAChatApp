@@ -18,8 +18,6 @@ class LoginController: UIViewController {
     var emailTextFieldHeightAnchor : NSLayoutConstraint?
     var passwordTextFieldHeightAnchor : NSLayoutConstraint?
 
-    
-    
     var inputsContainerView : UIView = {
         let view = UIView()
         view.backgroundColor = .white

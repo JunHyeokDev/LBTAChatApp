@@ -48,13 +48,36 @@ class ChatMessageCell: UICollectionViewCell {
         return imageView
     }()
     
+    let messageImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = 16
+        imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        imageView.backgroundColor = UIColor.brown
+        return imageView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(bubbleView) // ADD IT FIRST!!!!!!!!!!!!!!!!!!!!
         addSubview(textView)   //  We need to put it to the VIEW!
         addSubview(profileImageView)
         
+        bubbleView.addSubview(messageImageView)
+        
+        NSLayoutConstraint.activate([
+            messageImageView.leftAnchor.constraint(equalTo: bubbleView.leftAnchor),
+            messageImageView.topAnchor.constraint(equalTo: bubbleView.topAnchor),
+            messageImageView.heightAnchor.constraint(equalTo: bubbleView.heightAnchor),
+            messageImageView.widthAnchor.constraint(equalTo: bubbleView.widthAnchor)
+
+        ])
+        
+        
+        
         // and then we need constraints // x,y, width, height
+
         NSLayoutConstraint.activate([
             
             //textView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 3),

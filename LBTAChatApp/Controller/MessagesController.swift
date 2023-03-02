@@ -35,40 +35,50 @@ class MessagesController: UITableViewController {
         
         let ref = Database.database().reference().child("user-messages").child(uid)
         ref.observe(.childAdded ) { (snapshot) in
-            let messageId = snapshot.key
-            let messageReference = Database.database().reference().child("messages").child(messageId)
-            messageReference.observeSingleEvent(of: .value) { (snapshot) in
-                print(snapshot)
-                if let dictionary = snapshot.value as? [String:AnyObject] {
-                    let message = Message()
-                    message.text = dictionary["text"] as? String
-                    message.timestamp = dictionary["timestamp"] as? NSNumber
-                    message.toId = dictionary["toId"] as? String
-                    message.fromID = dictionary["fromID"] as? String
-                    
-                    
-                    if let chatPartnerId = message.chatPartnerId() {
-                        self.messagesDictionary[chatPartnerId] = message
-                        self.messages = Array(self.messagesDictionary.values)
-                        self.messages.sort { (message1, message2) -> Bool in
-                            return message1.timestamp!.intValue > message2.timestamp!.intValue
-                        }
-                    }
-                    // 이렇게 하면 이미지가 순간적으로 바뀌어 나오는 것이 사라짐.
-                    self.timer?.invalidate()
-                    print("We just cancled our timer!")
-                    self.timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
-                    print("schdule a table reload in 0.2 sec!")
-
-                }
+            let userId = snapshot.key
+            
+            Database.database().reference().child("user-messages").child(uid).child(userId).observe(.childAdded) { (snapshot) in
+                let messageId = snapshot.key
+                self.fetchMessageWithMessageId(messageId: messageId)
+                
             }
         }
         
     }
     
+    private func fetchMessageWithMessageId(messageId : String) {
+        let messageReference = Database.database().reference().child("messages").child(messageId)
+        messageReference.observeSingleEvent(of: .value) { (snapshot) in
+            if let dictionary = snapshot.value as? [String:AnyObject] {
+                let message = Message()
+                message.text = dictionary["text"] as? String
+                message.timestamp = dictionary["timestamp"] as? NSNumber
+                message.toId = dictionary["toId"] as? String
+                message.fromID = dictionary["fromID"] as? String
+                
+                if let chatPartnerId = message.chatPartnerId() {
+                    self.messagesDictionary[chatPartnerId] = message
+                    
+                }
+                // 이렇게 하면 이미지가 순간적으로 바뀌어 나오는 것이 사라짐.
+                self.attemptReloadOfTable()
+            }
+        }
+    }
+    
     var timer: Timer?
     
+    private func attemptReloadOfTable() {
+        self.timer?.invalidate()
+        self.timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
+    }
+    
     @objc func handleReloadTable() {
+        self.messages = Array(self.messagesDictionary.values)
+        self.messages.sort { (message1, message2) -> Bool in
+            return message1.timestamp!.intValue > message2.timestamp!.intValue
+        }
+        
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -116,14 +126,10 @@ class MessagesController: UITableViewController {
     
     func fetchUserAndSetupNavBarTitle() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        print(Database.database().reference().child("users").child(uid))
         Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value) { (snapshot ,error) in
             if error != nil {
                 print(error)
             }
-            
-            print(snapshot)
-            
             if let dictionary = snapshot.value as? [String : AnyObject] {
                 //self.navigationItem.title = dictionary["name"] as? String
                 
@@ -199,7 +205,6 @@ class MessagesController: UITableViewController {
     }
     
     @objc func showChatControllerForUser(user : User) {
-        print(123)
         let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
         chatLogController.user = user
         navigationController?.pushViewController(chatLogController, animated: true)
@@ -230,15 +235,12 @@ class MessagesController: UITableViewController {
         guard let chatPartnerId = message.chatPartnerId() else { return }
         let ref = Database.database().reference().child("users").child(chatPartnerId)
         ref.observeSingleEvent(of: .value) { (snapshot) in
-            print(snapshot)
             guard let dictionary = snapshot.value as? [String : AnyObject] else { return }
             let user = User()
             user.id = chatPartnerId
             user.setValuesForKeys(dictionary)
             self.showChatControllerForUser(user: user)
         }
-        
-        
     }
 }
 
